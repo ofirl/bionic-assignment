@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:400,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Rajdhani:400,500,600,700&display=swap");
+
+a,
+a:active,
+a:visited {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
+html,
+body {
+  height: 100%;
+  background-color: var(--main-bg);
+  color: white;
+  font-family: Rajdhani, sans-serif;
+}
+
+#root {
+  height: 100%;
+}
+
+*::selection {
+  color: #fff;
+  background-color: var(--primary-color);
+}
+
+:root {
+  /* theme main colors */
+  --main-bg: #161b28;
+  --content-bg: #1d2333;
+  --top-bar-bg: #7750f8;
+  --top-bar-icon-fill: #9b7dff;
+  --general-search-bg: #5538b5;
+  --content-secondary-bg: #21283b;
+  --content-disabled-bg: #282828;
+  --primary-color: #40d04f;
+  --secondary-color: #7750f8;
+  --text-label-color: #9aa4bf;
+  --text-disabled-color: #808080;
+  --content-inside-border-color: #2f3749;
+
+  /* theme icons */
+  --icon-bg-hover: #293249;
+  --icon-fill: #616a82;
+  --icon-fill-hover: #4ff461;
+
+  /* theme buttons */
+  --button-primary-bg: var(--primary-color);
+  --button-primary-bg-shadow: #40d04f33;
+  --button-primary-bg-hover: #4ae95b;
+  --button-secondary-bg: var(--secondary-color);
+  --button-secondary-bg-shadow: #7750f833;
+  --button-secondary-bg-hover: #9668ff;
+
+  /* theme text */
+  --caption-color: #9aa4bf;
+
+  /* misc colors */
+  --blueish-white: rgb(248, 248, 252);
+  --theme-blue-hovered: #3b606f;
+
+  /* hexagon defaults */
+  --progress-start: #41d04f;
+  --progress-end: #d8ff65;
+}
+
+.center-vertical {
+  align-items: center;
+  align-content: center;
+  display: grid;
+}
+
+.center-vertical-soft {
+  align-items: center;
+  display: grid;
+}
+
+.center-horizontal {
+  justify-items: center;
+  text-align: center;
+  display: grid;
+}
+
+.center-horizontal-soft {
+  justify-content: center;
+  text-align: center;
+  display: grid;
+}
+
+.pointer {
+  cursor: pointer;
+}
