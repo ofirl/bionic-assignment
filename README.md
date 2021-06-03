@@ -18,3 +18,5 @@ but the underlying data is correct :)
 also i'm still missing some specific error messages handling (like "Repository not found" instead of "Error loading...").
 
 i'm estimating that with another hour or so i would get the heat map to look ok and i would have all the errors correctly showing
+
+I spent time more on design and UX than on responsiveness, but most stuff should work fine on small phone screens too.
