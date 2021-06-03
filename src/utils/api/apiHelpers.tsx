@@ -8,7 +8,7 @@ export type RequestOptions = {
 export const simpleGetRequest = async <T extends unknown>(path: string, options?: RequestOptions): Promise<T> => {
     return axios.get(`${path}`, {
         headers: {
-            "Authorization": `token ${githubToken}`,
+            "Authorization": githubToken ? `token ${githubToken}` : undefined,
         },
     }).then(res => {
         if (!res || res.status !== 200)

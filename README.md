@@ -3,6 +3,7 @@
 ### Install all the dependencies
 
 yarn install
+create a .env file with the line: "REACT_APP_GITHUB_API_TOKEN=TOKEN" (with your token) to get better rate limit
 
 ### Start the application
 
