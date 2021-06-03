@@ -2,15 +2,11 @@ import React from 'react';
 
 import { Cell, Grid } from 'styled-css-grid';
 
-import { AppBar, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 
 import CommitList from './components/CommitList/CommitList';
 
-import { useGetRepositoryCommits } from '../../utils/queries/Github';
-
-import { useRepositoryDefinition } from '../../context/RepositoryDefinitionContext';
-
-import { useMergeInfiniteQueryData } from '../customHooks/useMergeInfiniteQueryData';
+import TopBar from './components/TopBar/TopBar';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     contentGrid: {
@@ -19,17 +15,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 const RepositoryPage = () => {
-    const { owner, repository, branch } = useRepositoryDefinition();
-
     const classes = useStyles();
 
     return (
         <>
-            <AppBar position="sticky">
-                <Typography variant="h6">
-                    {`${owner}/${repository}/${branch}`}
-                </Typography>
-            </AppBar>
+            <TopBar />
             <Grid columns="1fr" rows="1fr" areas={[".", "commitList"]} className={classes.contentGrid}>
                 <Cell area="commitList">
                     <CommitList />

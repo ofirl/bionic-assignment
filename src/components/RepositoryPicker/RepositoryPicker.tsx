@@ -3,9 +3,18 @@ import { RepositoryDefinitionSetters } from '../../utils/types';
 
 import { Cell, Grid } from 'styled-css-grid';
 
-import { Button, TextField } from '@material-ui/core';
+import { Button, createStyles, makeStyles, TextField, Theme } from '@material-ui/core';
+
+import BranchPicker from './components/BranchPicker/BranchPicker';
 
 import { useRepositoryDefinition } from '../../context/RepositoryDefinitionContext';
+
+const useStyles = makeStyles((theme: Theme) => createStyles({
+    mainForm: {
+        width: '100%',
+        maxWidth: '20em',
+    },
+}));
 
 const gridLayoutMap: Record<RepositoryPickerVariant, { rows: string, columns: string }> = {
     appbar: {
@@ -25,32 +34,39 @@ export interface RepositoryPickerProps extends RepositoryDefinitionSetters {
 const RepositoryPicker = ({ setOwner, setRepository, setBranch, variant = 'appbar' }: RepositoryPickerProps) => {
     const { owner, repository, branch, toggleQueriesEnabled } = useRepositoryDefinition();
 
+    const classes = useStyles();
+
     const generateInputHandler = (setFunc: (value: string) => void) => {
         return (e: FormEvent<HTMLDivElement>) => {
             setFunc((e.target as HTMLInputElement).value)
         };
     };
 
+    const TrySubmitForm = () => {
+        if (owner && repository && branch)
+            toggleQueriesEnabled();
+    };
+
     const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        toggleQueriesEnabled();
+        TrySubmitForm();
     };
 
     return (
-        <form onSubmit={onFormSubmit}>
+        <form onSubmit={onFormSubmit} className={classes.mainForm}>
             <Grid {...gridLayoutMap[variant]}>
                 <Cell>
-                    <TextField variant="outlined" label="Owner" value={owner} onInput={generateInputHandler(setOwner)} />
+                    <TextField required variant="outlined" label="Owner" value={owner} onInput={generateInputHandler(setOwner)} />
                 </Cell>
                 <Cell>
-                    <TextField variant="outlined" label="Repository" value={repository} onInput={generateInputHandler(setRepository)} />
+                    <TextField required variant="outlined" label="Repository" value={repository} onInput={generateInputHandler(setRepository)} />
                 </Cell>
                 <Cell>
-                    <TextField variant="outlined" label="Branch" value={branch} onInput={generateInputHandler(setBranch)} />
+                    <BranchPicker required branch={branch} onChange={setBranch} />
                 </Cell>
                 <Cell className="center-vertical">
-                    <Button type="submit" variant="contained" color="primary" onClick={toggleQueriesEnabled}>
+                    <Button type="submit" variant="contained" color="primary" onClick={TrySubmitForm}>
                         {`Sumbit`}
                     </Button>
                 </Cell>

@@ -26,3 +26,7 @@ export type RepositoryCommit = {
     },
     sha: string,
 };
+
+export type RepositoryBranch = {
+    name: string,
+};

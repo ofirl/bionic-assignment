@@ -1,7 +1,7 @@
-import { useInfiniteQuery, UseInfiniteQueryOptions } from "react-query";
-import { RepositoryCommit } from "../types";
+import { useInfiniteQuery, UseInfiniteQueryOptions, useQuery, UseQueryOptions } from "react-query";
+import { RepositoryBranch, RepositoryCommit } from "../types";
 
-import { getRepositoryCommits } from "../api/Github";
+import { getRepositoryBranches, getRepositoryCommits } from "../api/Github";
 import { commitsPerPage } from "../api/apiConsts";
 import { useSnackbar } from "notistack";
 
@@ -18,5 +18,20 @@ export const useGetRepositoryCommits = (owner: string, repository: string, branc
             enqueueSnackbar('Error loading commits', { variant: 'error' });
         },
         getNextPageParam: (lastPage, allPages) => lastPage.length === commitsPerPage ? allPages.length + 1 : undefined,
+    });
+};
+
+export const useGetRepositoryBranches = (owner: string, repository: string, queryOptions?: UseQueryOptions<RepositoryBranch[]>) => {
+    const { enqueueSnackbar } = useSnackbar();
+
+    return useQuery(['branches', owner, repository], () => getRepositoryBranches({ owner, repository }), {
+        ...queryOptions,
+        onSuccess: (posts) => {
+
+            queryOptions?.onSuccess?.(posts);
+        },
+        onError: (err) => {
+            enqueueSnackbar('Error loading branches', { variant: 'error' });
+        },
     });
 };
