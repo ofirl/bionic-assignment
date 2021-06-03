@@ -17,7 +17,7 @@ export type RepositoryCommit = {
             email: string,
             date: Date,
         },
-        commiter: {
+        committer: {
             name: string,
             email: string,
             date: Date,

@@ -21,12 +21,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 const RepositoryPage = () => {
     const { owner, repository, branch } = useRepositoryDefinition();
 
-    const { data, isLoading, isFetchingNextPage } = useGetRepositoryCommits(owner, repository, branch);
-
-    const mergedData = useMergeInfiniteQueryData(data);
-
-    console.log(mergedData);
-
     const classes = useStyles();
 
     return (

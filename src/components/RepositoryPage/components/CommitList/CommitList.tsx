@@ -15,8 +15,10 @@ import CommitDetails from './components/CommitDetails/CommitDetails';
 const CommitList = () => {
     const { owner, repository, branch } = useRepositoryDefinition();
     const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetRepositoryCommits(owner, repository, branch);
+    const mergedData = useMergeInfiniteQueryData(data);
 
-    const allCommits = useMergeInfiniteQueryData(data);
+    console.log(data);
+    console.log(mergedData);
 
     const { ref: moreCommitsCellRef, inView: moreCommitsCellInView } = useInView({
         initialInView: true,
@@ -36,7 +38,7 @@ const CommitList = () => {
                         isLoading ?
                             <Loader />
                             :
-                            allCommits?.map(commit => (
+                            mergedData?.map(commit => (
                                 <CommitDetails key={commit.sha} commit={commit} />
                             ))
                     }
