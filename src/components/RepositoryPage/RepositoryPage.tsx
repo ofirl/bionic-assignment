@@ -7,6 +7,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import CommitList from './components/CommitList/CommitList';
 
 import TopBar from './components/TopBar/TopBar';
+import CommitStatistics from './components/CommitStatistics/CommitStatistics';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     contentGrid: {
@@ -20,7 +21,10 @@ const RepositoryPage = () => {
     return (
         <>
             <TopBar />
-            <Grid columns="1fr" rows="1fr" areas={[".", "commitList"]} className={classes.contentGrid}>
+            <Grid columns="1fr" rows="20em 1fr" areas={["heatmap", "commitList"]} className={classes.contentGrid}>
+                <Cell area="heatmap">
+                    <CommitStatistics />
+                </Cell>
                 <Cell area="commitList">
                     <CommitList />
                 </Cell>

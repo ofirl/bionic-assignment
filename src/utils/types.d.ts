@@ -30,3 +30,9 @@ export type RepositoryCommit = {
 export type RepositoryBranch = {
     name: string,
 };
+
+export type CommitWeeklyStatistic = {
+    days: number[],
+    total: number,
+    week: Date,
+};

@@ -1,7 +1,7 @@
 import { useInfiniteQuery, UseInfiniteQueryOptions, useQuery, UseQueryOptions } from "react-query";
-import { RepositoryBranch, RepositoryCommit } from "../types";
+import { CommitWeeklyStatistic, RepositoryBranch, RepositoryCommit } from "../types";
 
-import { getRepositoryBranches, getRepositoryCommits } from "../api/Github";
+import { getRepositoryBranches, getRepositoryCommits, getRepositoryCommmitStatistics } from "../api/Github";
 import { commitsPerPage } from "../api/apiConsts";
 import { useSnackbar } from "notistack";
 
@@ -32,6 +32,21 @@ export const useGetRepositoryBranches = (owner: string, repository: string, quer
         },
         onError: (err) => {
             enqueueSnackbar('Error loading branches', { variant: 'error' });
+        },
+    });
+};
+
+export const useGetRepositoryCommmitStatistics = (owner: string, repository: string, queryOptions?: UseQueryOptions<CommitWeeklyStatistic[]>) => {
+    const { enqueueSnackbar } = useSnackbar();
+
+    return useQuery(['statistics', owner, repository], () => getRepositoryCommmitStatistics({ owner, repository }), {
+        ...queryOptions,
+        onSuccess: (posts) => {
+
+            queryOptions?.onSuccess?.(posts);
+        },
+        onError: (err) => {
+            enqueueSnackbar('Error loading statistics', { variant: 'error' });
         },
     });
 };
